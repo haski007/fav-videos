@@ -6,7 +6,7 @@ type Config struct {
 }
 
 type Bot struct {
-	Token string `json:"token" env:"FVB_TOKEN" required:"true"`
+	Token Token `json:"token" env:"FVB_TOKEN,required"`
 }
 
 type MongoCfg struct {
@@ -14,4 +14,14 @@ type MongoCfg struct {
 	HostName string `json:"host_name"`
 	Port     string `json:"host_name"`
 	DBName   string `json:"db_name"`
+}
+
+func (b Bot) GetToken() Token {
+	return b.Token
+}
+
+type Token string
+
+func (t Token) String() string {
+	return string(t)
 }
