@@ -21,7 +21,7 @@ func StartBot(bot *resource.FVBService) {
 		if errR := recover(); errR != nil {
 			_, err := bot.Bot.Send(
 				tgbotapi.NewMessage(
-					370649141,
+					bot.Cfg.CreatorID,
 					fmt.Sprintf("[Main panic] err: %+v\n", errR)))
 			if err != nil {
 				logrus.Fatalf("[defer panic] err: %s", err)

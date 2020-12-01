@@ -6,7 +6,8 @@ type Config struct {
 }
 
 type Bot struct {
-	Token Token `json:"token" env:"FVB_TOKEN,required"`
+	Token     Token `json:"token" env:"FVB_TOKEN,required"`
+	CreatorID int64 `json:"creator_id" env:"CREATOR_ID"`
 }
 
 type MongoCfg struct {
