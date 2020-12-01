@@ -2,7 +2,6 @@
 .vscode
 .env
 
-
 # Binaries for programs and plugins
 *.exe
 *.exe~
