@@ -9,4 +9,5 @@ require (
 	github.com/sirupsen/logrus v1.7.0
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/urfave/cli v1.22.5
+	github.com/valyala/fasthttp v1.17.0
 )
