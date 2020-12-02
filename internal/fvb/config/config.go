@@ -3,7 +3,7 @@ package config
 type Config struct {
 	MongoDB MongoCfg `json:"mongo"`
 	Bot     Bot      `json:"bot"`
-	TikTok  TikTok   `json"TikTok"`
+	TikTok  TikTok   `json:"TikTok"`
 }
 
 type Bot struct {
@@ -21,10 +21,13 @@ type TikTok struct {
 }
 
 type MongoCfg struct {
-	Addr     string `json:"addr"`
-	HostName string `json:"host_name"`
-	Port     string `json:"host_name"`
-	DBName   string `json:"db_name"`
+	// Deprecated
+	Addr     string `json:"addr" env:"MONGO_ADDR"`
+	HostName string `json:"host_name" env:"MONGO_HOST"`
+	Port     string `json:"port" env:"MONGO_PORT"`
+	DBName   string `json:"db_name" env:"MONGO_DBNAME"`
+	Username string `json:"username" env:"MONGO_USERNAME"`
+	Password string `json:"password" env:"MONGO_PASSWORD"`
 }
 
 func (b Bot) GetToken() Token {

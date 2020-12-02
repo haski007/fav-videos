@@ -2,20 +2,23 @@ package resource
 
 import (
 	"errors"
-	"fmt"
 	"github.com/Haski007/fav-videos/internal/fvb/config"
+	"github.com/Haski007/fav-videos/internal/fvb/repository/mongodb"
 	"github.com/caarlos0/env"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/sirupsen/logrus"
 	"github.com/valyala/fasthttp"
 	"log"
 	"net/http"
+
+	"github.com/globalsign/mgo"
 )
 
 type FVBService struct {
 	Bot       *tgbotapi.BotAPI
 	Cfg       *config.Bot
 	TiktokCfg *config.TikTok
+	coll      *mgo.Collection
 }
 
 func NewFVBService() (*FVBService, error) {
@@ -23,13 +26,17 @@ func NewFVBService() (*FVBService, error) {
 
 	bot := &FVBService{}
 
-	// ---> Bot configs
+	/*
+	** ---> Bot configs
+	 */
 	bot.Cfg = &config.Bot{}
 	if err := env.Parse(bot.Cfg); err != nil {
 		logrus.Fatalf("[env Parse] Bot config err: %s", err)
 	}
 
-	// ---> TikTok configs
+	/*
+	** ---> TikTok configs
+	 */
 	bot.TiktokCfg = &config.TikTok{}
 	if err := env.Parse(bot.TiktokCfg); err != nil {
 		logrus.Fatalf("[env Parse] TikTok config err: %s", err)
@@ -40,7 +47,11 @@ func NewFVBService() (*FVBService, error) {
 			log.Fatalln("SecUID", err)
 		}
 	}
-	fmt.Println(bot.TiktokCfg.SecUserID)
+
+	/*
+	** ---> mongo Collection
+	 */
+	bot.coll = mongodb.InitChatsConn()
 
 	bot.Bot, err = tgbotapi.NewBotAPI(bot.Cfg.GetToken().String())
 	if err != nil {

@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: fav-videos-mongo
+    hostname: 172.20.0.2
+    volumes:
+      - ./.docker/mongodb/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+      - ./.docker/mongodb/data/db/:/data/db/
+      - ./.docker/mongodb/data/log/:/var/log/mongodb/
+#    env_file:
+#      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: fav-videos
+    ports:
+      - "27017:27017"

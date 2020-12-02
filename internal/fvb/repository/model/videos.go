@@ -1,4 +1,4 @@
-package repository
+package model
 
 type Video struct {
 	ID          string

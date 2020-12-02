@@ -5,12 +5,12 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Haski007/fav-videos/internal/fvb/config"
-	"github.com/Haski007/fav-videos/internal/fvb/repository"
+	"github.com/Haski007/fav-videos/internal/fvb/repository/model"
 	"github.com/valyala/fasthttp"
 	"net/http"
 )
 
-func GetLikedVideos(secUserID string, count int) ([]repository.Video, error) {
+func GetLikedVideos(secUserID string, count int) ([]model.Video, error) {
 	req := &fasthttp.Request{}
 	res := &fasthttp.Response{}
 
@@ -25,7 +25,7 @@ func GetLikedVideos(secUserID string, count int) ([]repository.Video, error) {
 		return nil, err
 	}
 
-	var tiktokResp repository.AwemeFavoriteResponse
+	var tiktokResp model.AwemeFavoriteResponse
 	err = json.Unmarshal(res.Body(), &tiktokResp)
 	if err != nil {
 		return nil, err
@@ -35,12 +35,12 @@ func GetLikedVideos(secUserID string, count int) ([]repository.Video, error) {
 		return nil, errors.New(tiktokResp.StatusMessage)
 	}
 
-	var videos []repository.Video
+	var videos []model.Video
 	for _, v := range tiktokResp.AwemeList {
 		if len(v.Video.PlayAddr.URLList) == 0 {
 			continue
 		}
-		videos = append(videos, repository.Video{
+		videos = append(videos, model.Video{
 			ID:          v.ID,
 			ShareURL:    v.ShareURL,
 			DownloadURL: v.Video.PlayAddr.URLList[0],

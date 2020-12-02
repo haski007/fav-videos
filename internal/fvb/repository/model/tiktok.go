@@ -1,4 +1,4 @@
-package repository
+package model
 
 type AwemeFavoriteResponse struct {
 	StatusMessage string `json:"status_msg"`

@@ -2,7 +2,7 @@ package resource
 
 import (
 	"github.com/Haski007/fav-videos/api"
-	"github.com/Haski007/fav-videos/internal/fvb/repository"
+	"github.com/Haski007/fav-videos/internal/fvb/repository/model"
 	"github.com/Haski007/fav-videos/pkg/file"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/sirupsen/logrus"
@@ -33,7 +33,7 @@ func (bot *FVBService) CheckNewVideos() {
 		}
 
 		resp := tgbotapi.NewVideoUpload(bot.Cfg.CreatorID, tmpFileName)
-		resp.ReplyMarkup = repository.NewOriginalURLMarkup(v.ShareURL)
+		resp.ReplyMarkup = model.NewOriginalURLMarkup(v.ShareURL)
 
 		if message, err := bot.Bot.Send(resp); err != nil {
 			logrus.Errorf("[bot Send] video | message: %+v | err: %s", message, err)
