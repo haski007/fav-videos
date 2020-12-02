@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/Haski007/fav-videos/internal/fvb/config"
-	"github.com/Haski007/fav-videos/internal/fvb/repository/model"
-	"github.com/valyala/fasthttp"
 	"net/http"
+
+	"github.com/Haski007/fav-videos/internal/fvb/config"
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
+	"github.com/valyala/fasthttp"
 )
 
 func GetLikedVideos(secUserID string, count int) ([]model.Video, error) {
@@ -52,4 +53,25 @@ func GetLikedVideos(secUserID string, count int) ([]model.Video, error) {
 	}
 
 	return videos, nil
+}
+
+func GetSecureUserID(username string) (string, error) {
+	req := &fasthttp.Request{}
+	res := &fasthttp.Response{}
+
+	req.Header.SetMethod(http.MethodGet)
+	req.SetRequestURI("https://www.tiktok.com/@" + username)
+	req.Header.SetUserAgent(config.UserAgent)
+
+	err := fasthttp.Do(req, res)
+	if err != nil {
+		return "", err
+	}
+
+	matches := config.SecUIDReg.FindStringSubmatch(res.String())
+	if len(matches) != 2 {
+		return "", errors.New("no matches")
+	}
+
+	return matches[1], nil
 }

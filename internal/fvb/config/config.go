@@ -21,7 +21,6 @@ type TikTok struct {
 }
 
 type MongoCfg struct {
-	// Deprecated
 	Addr     string `json:"addr" env:"MONGO_ADDR"`
 	HostName string `json:"host_name" env:"MONGO_HOST"`
 	Port     string `json:"port" env:"MONGO_PORT"`

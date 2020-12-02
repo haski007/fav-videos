@@ -6,6 +6,6 @@ import (
 
 func (bot *FVBService) commandHelpHandler(update tgbotapi.Update) {
 	bot.Reply(
-		update,
+		update.Message.Chat.ID,
 		"Here is bot to subscribe on someone's liked videos in TikTok")
 }

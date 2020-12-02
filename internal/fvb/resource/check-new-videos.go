@@ -2,7 +2,7 @@ package resource
 
 import (
 	"github.com/Haski007/fav-videos/api"
-	"github.com/Haski007/fav-videos/internal/fvb/repository/model"
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
 	"github.com/Haski007/fav-videos/pkg/file"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/sirupsen/logrus"
