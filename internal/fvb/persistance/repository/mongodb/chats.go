@@ -48,6 +48,13 @@ func (r *ChatRepository) SaveNewChat(chat *model.Chat) error {
 	return r.coll.Insert(chat)
 }
 
+func (r *ChatRepository) GetAllChats(chats *[]model.Chat) {
+	if err := r.coll.Find(bson.M{}).All(chats); err != nil {
+		logrus.Errorf("[GetAllChats] err: %s", err)
+		return
+	}
+}
+
 func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) error {
 	if !r.ChatExists(chatID) {
 		return repository.ErrChatDoesNotExist
@@ -68,6 +75,36 @@ func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) er
 
 func (r *ChatRepository) ChatExists(id int64) bool {
 	count, _ := r.coll.FindId(id).Count()
+	if count != 0 {
+		return true
+	}
+	return false
+}
+
+func (r *ChatRepository) PushPostedVideo(chatID int64, videoID string) error {
+	if !r.ChatExists(chatID) {
+		return repository.ErrChatDoesNotExist
+	}
+
+	findQuery := bson.M{
+		"_id": chatID,
+	}
+	updateQuery := bson.M{
+		"$push": bson.M{
+			"posted_videos": videoID,
+		},
+	}
+
+	err := r.coll.Update(findQuery, updateQuery)
+	return err
+}
+
+func (r *ChatRepository) PostedVideoExists(chatID int64, videoID string) bool {
+	query := bson.M{
+		"_id":           chatID,
+		"posted_videos": videoID,
+	}
+	count, _ := r.coll.Find(query).Count()
 	if count != 0 {
 		return true
 	}

@@ -33,7 +33,7 @@ func StartBot(bot *resource.FVBService) {
 	}()
 
 	go bot.HandleRoutes(updates)
-	//go tiktokLoop(bot)
+	go tiktokLoop(bot)
 
 	graceshut.Loop()
 }

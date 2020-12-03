@@ -11,14 +11,14 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-func GetLikedVideos(secUserID string, count int) ([]model.Video, error) {
+func GetLikedVideos(publisher *model.Publisher, count int) ([]model.Video, error) {
 	req := &fasthttp.Request{}
 	res := &fasthttp.Response{}
 
 	req.Header.SetMethod(http.MethodGet)
 	req.SetRequestURI("https://api16-normal-c-alisg.tiktokv.com/aweme/v1/aweme/favorite/?" +
 		fmt.Sprintf("aid=%d&device_id=%d&sec_user_id=%s&count=%d",
-			config.Aid, 1000000000+config.SeededRand.Intn(1000000000), secUserID, count))
+			config.Aid, 1000000000+config.SeededRand.Intn(1000000000), publisher.SecureID, count))
 	req.Header.SetUserAgent(config.UserAgent)
 
 	err := fasthttp.Do(req, res)
@@ -45,6 +45,7 @@ func GetLikedVideos(secUserID string, count int) ([]model.Video, error) {
 			ID:          v.ID,
 			ShareURL:    v.ShareURL,
 			DownloadURL: v.Video.PlayAddr.URLList[0],
+			Publisher:   publisher.Username,
 		})
 	}
 
