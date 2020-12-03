@@ -12,9 +12,8 @@ type Bot struct {
 }
 
 type TikTok struct {
-	// TODO: create collection in mongo with all chat ids
 	// Deprecated
-	ChannelID int64 `env:"CHANNEL_ID,required"`
+	ChannelID int64 `env:"CHANNEL_ID"`
 
 	Username  string `env:"TIKTOK_USERNAME,required"`
 	SecUserID string `env:"TIKTOK_SEC_USER_ID"`
