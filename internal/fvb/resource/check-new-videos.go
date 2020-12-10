@@ -39,7 +39,7 @@ func (bot *FVBService) CheckNewVideos() {
 					logrus.Errorf("[file GetFileByUrl] err: %s", err)
 				}
 
-				resp := tgbotapi.NewVideoUpload(bot.Cfg.CreatorID, tmpFileName)
+				resp := tgbotapi.NewVideoUpload(chat.ID, tmpFileName)
 				resp.Caption = fmt.Sprintf("Liked by %s %s!", v.Publisher, emoji.Heart)
 				resp.ReplyMarkup = model.NewOriginalURLMarkup(v.ShareURL)
 

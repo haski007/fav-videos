@@ -11,19 +11,28 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (bot *FVBService) regNewChat(update tgbotapi.Update) {
+func (bot *FVBService) commandRegNewChatHandler(update tgbotapi.Update) {
 	chatID := update.Message.Chat.ID
-	chatName := update.Message.Chat.FirstName + " " + update.Message.Chat.LastName
 
+	var chatName string
+	if update.Message.Chat.UserName == "" {
+		chatName = update.Message.Chat.Title
+	} else {
+		chatName = update.Message.Chat.FirstName + " " + update.Message.Chat.LastName
+	}
 	chat := model.NewChat(chatID, chatName)
 
 	if err := bot.ChatRepository.SaveNewChat(chat); err != nil {
 		switch err {
 		case repository.ErrChatAlreadyExists:
-			bot.Reply(chatID, "Chat is already registered "+emoji.NoEntry)
+			bot.Reply(
+				chatID,
+				"Chat is already registered "+emoji.NoEntry)
 			return
 		default:
-			bot.Reply(chatID, "Internal Server Error! err: %s"+err.Error())
+			bot.Reply(
+				chatID,
+				"Internal Error! "+emoji.NoEntry)
 			bot.ReportToTheCreator(fmt.Sprintf("[SaveNewChat] chat %+v | err: %s", chat, err))
 			logrus.Errorf("[SaveNewChat] chat %+v | err: %s", chat, err)
 			return

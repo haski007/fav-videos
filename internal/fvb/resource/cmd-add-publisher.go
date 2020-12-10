@@ -14,7 +14,7 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-func (bot *FVBService) addPublisher(update tgbotapi.Update) {
+func (bot *FVBService) commandAddPublisher(update tgbotapi.Update) {
 	chatID := update.Message.Chat.ID
 
 	args := strings.Fields(update.Message.CommandArguments())

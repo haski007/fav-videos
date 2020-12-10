@@ -40,6 +40,17 @@ func (r *ChatRepository) InitChatsConn() {
 	r.coll = session.DB(cfg.DBName).C(collName)
 }
 
+/*
+** ---> CHATS
+ */
+
+func (r *ChatRepository) GetAllChats(chats *[]model.Chat) {
+	if err := r.coll.Find(bson.M{}).All(chats); err != nil {
+		logrus.Errorf("[GetAllChats] err: %s", err)
+		return
+	}
+}
+
 func (r *ChatRepository) SaveNewChat(chat *model.Chat) error {
 	if r.ChatExists(chat.ID) {
 		return repository.ErrChatAlreadyExists
@@ -48,11 +59,21 @@ func (r *ChatRepository) SaveNewChat(chat *model.Chat) error {
 	return r.coll.Insert(chat)
 }
 
-func (r *ChatRepository) GetAllChats(chats *[]model.Chat) {
-	if err := r.coll.Find(bson.M{}).All(chats); err != nil {
-		logrus.Errorf("[GetAllChats] err: %s", err)
-		return
+func (r *ChatRepository) RemoveChat(chatID int64) error {
+
+	if !r.ChatExists(chatID) {
+		return repository.ErrChatDoesNotExist
 	}
+
+	return r.coll.RemoveId(chatID)
+}
+
+func (r *ChatRepository) ChatExists(id int64) bool {
+	count, _ := r.coll.FindId(id).Count()
+	if count != 0 {
+		return true
+	}
+	return false
 }
 
 func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) error {
@@ -71,14 +92,6 @@ func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) er
 
 	err := r.coll.Update(findQuery, updateQuery)
 	return err
-}
-
-func (r *ChatRepository) ChatExists(id int64) bool {
-	count, _ := r.coll.FindId(id).Count()
-	if count != 0 {
-		return true
-	}
-	return false
 }
 
 func (r *ChatRepository) PushPostedVideo(chatID int64, videoID string) error {
