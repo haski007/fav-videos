@@ -20,7 +20,7 @@ type TikTok struct {
 }
 
 type MongoCfg struct {
-	Addr     string `json:"addr" env:"MONGO_ADDR"`
+	Addr     string `json:"addr" env:"DATABASE_URL"`
 	HostName string `json:"host_name" env:"MONGO_HOST"`
 	Port     string `json:"port" env:"MONGO_PORT"`
 	DBName   string `json:"db_name" env:"MONGO_DBNAME"`
