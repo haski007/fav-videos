@@ -33,6 +33,8 @@ func (bot *FVBService) HandleRoutes(updates tgbotapi.UpdatesChannel) {
 				go bot.commandAddPublisherHandler(update)
 			case command == "del_publisher" || command == "del_publisher"+"@"+botCreds.UserName:
 				go bot.commandDelPublisherHandler(update)
+			case command == "publishers" || command == "publishers"+"@"+botCreds.UserName:
+				go bot.commandPublishersHandler(update)
 			default:
 				bot.Reply(update.Message.Chat.ID, "Such command does not exist! "+emoji.NoEntry)
 			}

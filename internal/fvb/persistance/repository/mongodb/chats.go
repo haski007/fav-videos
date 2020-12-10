@@ -127,6 +127,26 @@ func (r *ChatRepository) RemovePublisher(chatId int64, username string) error {
 	return r.coll.Update(findQuery, updateQuery)
 }
 
+func (r *ChatRepository) GetAllPublishers(chatID int64, publishers *[]*model.Publisher) error {
+	if !r.ChatExists(chatID) {
+		return repository.ErrChatDoesNotExist
+	}
+
+	var chat model.Chat
+
+	if err := r.coll.FindId(chatID).One(&chat); err != nil {
+		return err
+	}
+
+	pubs := make([]*model.Publisher, len(chat.Publishers))
+	for i, p := range chat.Publishers {
+		pubs[i] = p
+	}
+
+	*publishers = pubs
+	return nil
+}
+
 // ---> Videos
 
 func (r *ChatRepository) PushPostedVideo(chatID int64, videoID string) error {
