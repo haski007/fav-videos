@@ -42,6 +42,11 @@ func (bot *FVBService) commandAddPublisherHandler(update tgbotapi.Update) {
 				chatID,
 				"Your chat is not registered!")
 			return
+		case repository.ErrUserAlreadyExists:
+			bot.Reply(
+				chatID,
+				"Such user already exists! "+emoji.NoEntry)
+			return
 		default:
 			bot.Reply(
 				chatID,

@@ -94,6 +94,10 @@ func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) er
 		return repository.ErrChatDoesNotExist
 	}
 
+	if r.UserExists(chatID, pub.Username) {
+		return repository.ErrUserAlreadyExists
+	}
+
 	findQuery := bson.M{
 		"_id": chatID,
 	}
