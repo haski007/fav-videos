@@ -14,14 +14,14 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-func (bot *FVBService) commandAddPublisher(update tgbotapi.Update) {
+func (bot *FVBService) commandAddPublisherHandler(update tgbotapi.Update) {
 	chatID := update.Message.Chat.ID
 
 	args := strings.Fields(update.Message.CommandArguments())
 	if len(args) == 0 {
 		bot.Reply(
 			chatID,
-			"No username.\nPlease use command like that:\n/app_publisher [tiktok-username]")
+			"No username.\nPlease use command like that:\n/add_publisher [tiktok-username]")
 		return
 	}
 

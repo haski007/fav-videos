@@ -40,9 +40,7 @@ func (r *ChatRepository) InitChatsConn() {
 	r.coll = session.DB(cfg.DBName).C(collName)
 }
 
-/*
-** ---> CHATS
- */
+// ---> CHATS
 
 func (r *ChatRepository) GetAllChats(chats *[]model.Chat) {
 	if err := r.coll.Find(bson.M{}).All(chats); err != nil {
@@ -76,6 +74,21 @@ func (r *ChatRepository) ChatExists(id int64) bool {
 	return false
 }
 
+// ---> Users
+
+func (r *ChatRepository) UserExists(chatID int64, username string) bool {
+	query := bson.M{
+		"_id":                 chatID,
+		"publishers.username": username,
+	}
+
+	count, _ := r.coll.Find(query).Count()
+	if count != 0 {
+		return true
+	}
+	return false
+}
+
 func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) error {
 	if !r.ChatExists(chatID) {
 		return repository.ErrChatDoesNotExist
@@ -93,6 +106,28 @@ func (r *ChatRepository) PushNewPublusher(chatID int64, pub *model.Publisher) er
 	err := r.coll.Update(findQuery, updateQuery)
 	return err
 }
+
+func (r *ChatRepository) RemovePublisher(chatId int64, username string) error {
+
+	if !r.UserExists(chatId, username) {
+		return repository.ErrUserDoesNotExist
+	}
+
+	findQuery := bson.M{
+		"_id": chatId,
+	}
+	updateQuery := bson.M{
+		"$pull": bson.M{
+			"publishers": bson.M{
+				"username": username,
+			},
+		},
+	}
+
+	return r.coll.Update(findQuery, updateQuery)
+}
+
+// ---> Videos
 
 func (r *ChatRepository) PushPostedVideo(chatID int64, videoID string) error {
 	if !r.ChatExists(chatID) {
