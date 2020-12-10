@@ -26,7 +26,7 @@ func (r *ChatRepository) InitChatsConn() {
 		logrus.Fatalf("[env Parse] MongoCfg err: %s", err)
 	}
 
-	//cfg.Addr = "mongodb://" + cfg.Username + ":" + cfg.Password + "@" + cfg.HostName + ":" + cfg.Port
+	cfg.Addr = "mongodb://" + cfg.Username + ":" + cfg.Password + "@" + cfg.HostName + ":" + cfg.Port
 
 	session, err := mgo.Dial(cfg.Addr)
 	if err != nil {
