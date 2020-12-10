@@ -20,7 +20,7 @@ func (bot *FVBService) CheckNewVideos() {
 
 	for _, chat := range chats {
 		for _, publisher := range chat.Publishers {
-			likes, err := api.GetLikedVideos(publisher, 10)
+			likes, err := api.GetLikedVideos(publisher, 3)
 			if err != nil {
 				logrus.Printf("[GetLikedVideos] err: %s", err)
 				return
