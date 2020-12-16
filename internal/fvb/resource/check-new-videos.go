@@ -15,6 +15,14 @@ import (
 )
 
 func (bot *FVBService) CheckNewVideos() {
+	defer func() {
+		if recoveryErr := recover(); recoveryErr != nil {
+			message := fmt.Sprintf("Panic [CheckNewVideos] err: %g", recoveryErr)
+			bot.ReportToTheCreator(message)
+			logrus.Errorf(message)
+		}
+	}()
+
 	var chats []model.Chat
 	bot.ChatRepository.GetAllChats(&chats)
 

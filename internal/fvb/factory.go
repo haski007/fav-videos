@@ -2,8 +2,6 @@ package fvb
 
 import (
 	"fmt"
-	"time"
-
 	"github.com/Haski007/fav-videos/internal/fvb/resource"
 	"github.com/Haski007/fav-videos/pkg/graceshut"
 	"github.com/Haski007/go-errors"
@@ -42,6 +40,6 @@ func tiktokLoop(bot *resource.FVBService) {
 	for {
 		bot.CheckNewVideos()
 		fmt.Println("Loop passed!")
-		time.Sleep(10 * time.Second)
+		//time.Sleep(10 * time.Second)
 	}
 }
