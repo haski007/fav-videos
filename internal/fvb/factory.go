@@ -7,6 +7,7 @@ import (
 	"github.com/Haski007/go-errors"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/sirupsen/logrus"
+	"time"
 )
 
 func StartBot(bot *resource.FVBService) {
@@ -40,6 +41,6 @@ func tiktokLoop(bot *resource.FVBService) {
 	for {
 		bot.CheckNewVideos()
 		fmt.Println("Loop passed!")
-		//time.Sleep(10 * time.Second)
+		time.Sleep(5 * time.Second)
 	}
 }
