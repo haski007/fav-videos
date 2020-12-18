@@ -5,13 +5,13 @@ import (
 	"log"
 	"time"
 
-	"github.com/Haski007/fav-videos/pkg/emoji"
-
-	"github.com/Haski007/fav-videos/api"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
-	"github.com/Haski007/fav-videos/pkg/file"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/Haski007/fav-music-bot/pkg/emoji"
+	"github.com/Haski007/fav-music-bot/api"
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-music-bot/pkg/file"
 	"github.com/sirupsen/logrus"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func (bot *FVBService) CheckNewVideos() {

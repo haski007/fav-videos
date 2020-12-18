@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Haski007/fav-videos/internal/fvb/config"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-music-bot/internal/fmb/config"
+	"github.com/Haski007/fav-music-bot/internal/fmb/persistance/model"
 	"github.com/valyala/fasthttp"
 )
 

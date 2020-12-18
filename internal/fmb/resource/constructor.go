@@ -1,11 +1,12 @@
 package resource
 
 import (
-	"github.com/Haski007/fav-videos/internal/fvb/config"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository/mongodb"
+	"github.com/Haski007/fav-music-bot/internal/fvb/config"
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository/mongodb"
 	"github.com/caarlos0/env"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/sirupsen/logrus"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 type FVBService struct {

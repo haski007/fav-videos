@@ -2,9 +2,11 @@ package resource
 
 import (
 	"fmt"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository"
-	"github.com/Haski007/fav-videos/pkg/emoji"
+
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository"
+	"github.com/Haski007/fav-music-bot/pkg/emoji"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 

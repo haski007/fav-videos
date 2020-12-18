@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Haski007/fav-videos/internal/fvb"
-	"github.com/Haski007/fav-videos/pkg/run"
+	"github.com/Haski007/fav-music-bot/internal/fvb"
+	"github.com/Haski007/fav-music-bot/pkg/run"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )

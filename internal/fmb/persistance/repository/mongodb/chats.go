@@ -1,9 +1,9 @@
 package mongodb
 
 import (
-	"github.com/Haski007/fav-videos/internal/fvb/config"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
-	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository"
+	"github.com/Haski007/fav-music-bot/internal/fvb/config"
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository"
 	"github.com/caarlos0/env"
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
