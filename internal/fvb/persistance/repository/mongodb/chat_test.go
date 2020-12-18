@@ -8,8 +8,8 @@ import (
 
 	"github.com/Haski007/fav-videos/api"
 
-	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/model"
-	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository"
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository"
 
 	"github.com/stretchr/testify/assert"
 )

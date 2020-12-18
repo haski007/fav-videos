@@ -1,9 +1,9 @@
 package fvb
 
 import (
-	"github.com/Haski007/fav-music-bot/internal/fvb/resource"
-	"github.com/Haski007/fav-music-bot/pkg/factory"
-	"github.com/Haski007/fav-music-bot/pkg/run"
+	"github.com/Haski007/fav-videos/internal/fvb/resource"
+	"github.com/Haski007/fav-videos/pkg/factory"
+	"github.com/Haski007/fav-videos/pkg/run"
 	"github.com/sirupsen/logrus"
 )
 

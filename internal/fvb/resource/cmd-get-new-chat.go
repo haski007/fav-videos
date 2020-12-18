@@ -3,12 +3,12 @@ package resource
 import (
 	"fmt"
 
-	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/model"
-	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository"
-	"github.com/Haski007/fav-music-bot/pkg/emoji"
-	"github.com/sirupsen/logrus"
+	"github.com/Haski007/fav-videos/pkg/emoji"
 
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/model"
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/sirupsen/logrus"
 )
 
 func (bot *FVBService) commandRegNewChatHandler(update tgbotapi.Update) {

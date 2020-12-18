@@ -2,14 +2,12 @@ package fvb
 
 import (
 	"fmt"
-	"time"
-
-	"github.com/Haski007/fav-music-bot/internal/fvb/resource"
-	"github.com/Haski007/fav-music-bot/pkg/graceshut"
+	"github.com/Haski007/fav-videos/internal/fvb/resource"
+	"github.com/Haski007/fav-videos/pkg/graceshut"
 	"github.com/Haski007/go-errors"
-	"github.com/sirupsen/logrus"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"github.com/sirupsen/logrus"
+	"time"
 )
 
 func StartBot(bot *resource.FVBService) {

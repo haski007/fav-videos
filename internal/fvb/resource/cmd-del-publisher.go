@@ -2,12 +2,10 @@ package resource
 
 import (
 	"fmt"
-	"strings"
-
-	"github.com/Haski007/fav-music-bot/internal/fvb/persistance/repository"
-	"github.com/Haski007/fav-music-bot/pkg/emoji"
-
+	"github.com/Haski007/fav-videos/internal/fvb/persistance/repository"
+	"github.com/Haski007/fav-videos/pkg/emoji"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"strings"
 )
 
 func (bot *FVBService) commandDelPublisherHandler(update tgbotapi.Update) {
